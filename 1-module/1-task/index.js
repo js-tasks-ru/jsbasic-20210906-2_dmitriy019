@@ -1,14 +1,16 @@
 function factorial(n) {
-  if ( n < 0 || n%1 != 0) {
-    return "Wrong argument! It must be a non-negative INTEGER like 0, 1, 2, 3 etc.";
+
+  if ((n < 0) || /*n%1 != 0*/ (!Number.isInteger(n))) {
+    return undefined;
   }  
-  let result = undefined;
-  if (n == 0) {
-    result = 1;
-  } else {
-    result = n;
+
+  if ((n == 0) || (n == 1)) {
+    return 1;
   }
-  for (i = n; i > 1; i--) {
+
+  let result = n;
+
+  for (i = n; i > 2; i--) {
     result = result * (i - 1);
   }
   return result;

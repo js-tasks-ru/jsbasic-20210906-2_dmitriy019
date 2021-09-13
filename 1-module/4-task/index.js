@@ -1,13 +1,7 @@
 function checkSpam(str) {
-  try {
-    if ((str.toUpperCase().indexOf("1XBET") > -1) || (str.toUpperCase().indexOf("XXX") > -1)) {
-      return true;
-    } else {
-      return false;
-    }
-
-  } catch(err) {  
-    //alert(err.message);
+  if ((str == null) || (str == undefined) || (str.toUpperCase().includes("1XBET")) || (str.toUpperCase().includes("XXX"))) {
+    return true;
+  } else {
     return false;
   }
 }
