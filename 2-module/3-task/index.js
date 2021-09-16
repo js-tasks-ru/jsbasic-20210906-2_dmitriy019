@@ -2,8 +2,8 @@ let calculator = {
   a: undefined,
   b: undefined,
   read(a, b) {
-    this.a = a;
-    this.b = b;
+    this.a = Number(a);
+    this.b = Number(b);
   },
   sum() {
     return this.a + this.b;
@@ -13,7 +13,7 @@ let calculator = {
   },
 };
 /*
-calculator.read(3, 5);
+calculator.read("3", "4");
 calculator.a;
 console.log(calculator.sum()); // 8
 console.log(calculator.mul()); // 15
