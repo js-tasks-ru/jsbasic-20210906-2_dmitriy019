@@ -1,10 +1,10 @@
 function camelize(str) {
-  let myArray = str.split("-");
-  for (let i = 1; i < myArray.length; i++) {
-    let item = myArray[i];
-    myArray[i] = item[0].toUpperCase() + item.substring(1, item.length);
-  }
-  return myArray.join("");
+  let strArr = str.split("-");
+  let returnArray = strArr.map(function(item, index) {
+    return ((index != 0) ? (item[0] ?? "").toUpperCase() : (item[0] ?? "").toLowerCase())
+      + item.substring(1, item.length);
+  });
+  return returnArray.join("");
 }
 
-//console.log(camelize("-qwer-def"));
+//console.log(camelize("qwe--asd-zxc"));

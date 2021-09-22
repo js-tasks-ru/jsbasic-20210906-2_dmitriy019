@@ -6,16 +6,12 @@
 // let users = [ vasya, petya, masha ];
 
 function namify(users) {
-  let names = [];
-  for (let user of users) {
-    names.push(user.name);
-  }
+  let names = users.map(item => item.name);
   return names;
 }
 
+//  let names = namify(users);
 
-// let names = namify(users);
-
-// console.log(names);
+//  console.log(names);
 
 
