@@ -1,7 +1,10 @@
 function showSalary(users, age) {
-  return users.map(function (item, index) {
-    return (item.age <= age ? ((index > 0 ? '\n' : '') +  item.name + ', ' + item.balance) : "");
-  }).join("");
+  // return users.map(function (item, index) {
+  //   return (item.age <= age ? ((index > 0 ? '\n' : '') +  item.name + ', ' + item.balance) : "");
+  // }).join("");
+  let youngerUsers = users.filter(item => item.age <= age);
+  let usersString = (youngerUsers.map(item => item.name + ', ' + item.balance)).join("\n");
+  return usersString;
 }
 /*
 let user1 = {
