@@ -11,6 +11,8 @@
           tr.hidden = true;
         }
 
-        if (tr.cells[1].innerHTML < 18) tr.setAttribute("style", "text-decoration: line-through");
+       // if (tr.cells[1].innerHTML < 18) tr.setAttribute("style", "text-decoration: line-through");
+        // Thanks for the tip!
+        if (tr.cells[1].innerHTML < 18) tr.style.textDecoration = "line-through";
       }
     }
