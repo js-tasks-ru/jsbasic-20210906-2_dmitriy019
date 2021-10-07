@@ -14,32 +14,33 @@
  */
 export default class UserTable {
   constructor(rows) {
-    this.tableHTML = "<thead><tr><th>Имя</th><th>Возраст</th><th>Зарплата</th><th>Город</th><th></th></tr></thead><tbody></tbody>";
     this.myTable = document.createElement("table");
-    this.myTable.innerHTML = this.tableHTML;
-    this.tableBody = this.myTable.querySelector("tbody");
-
-    this.counter = 0;
-    for (this.item of rows) {
-      this.myRow = this.tableBody.insertRow();
-      this.myRow.insertCell();
-      this.tableBody.rows[this.counter].cells[0].innerHTML = this.item.name;
-      this.myRow.insertCell();
-      this.tableBody.rows[this.counter].cells[1].innerHTML = this.item.age;
-      this.myRow.insertCell();  
-      this.tableBody.rows[this.counter].cells[2].innerHTML = this.item.salary;
-      this.myRow.insertCell();
-      this.tableBody.rows[this.counter].cells[3].innerHTML = this.item.city;
-      this.myRow.insertCell();     
-      this.tableBody.rows[this.counter].cells[4].innerHTML = "<button onclick='this.parentElement.parentElement.remove()'>X</button>";
-
-      this.counter++;
-    }
+    this.myTable.innerHTML = "<thead><tr><th>Имя</th><th>Возраст</th><th>Зарплата</th><th>Город</th><th></th></tr></thead><tbody></tbody>";
+    this.template(rows);
     this.elem = this.myTable;
   }
 
-  hideRow() {
-    alert(this.hideStr);
+  template(rows) {
+    let tableBody = this.myTable.querySelector("tbody");
+    let counter = 0;
+    let counter2 = 0;
+    for (let item of rows) {
+      let myRow = tableBody.insertRow();
+      
+      for (let key in item) {
+        myRow.insertCell();
+        tableBody.rows[counter].cells[counter2].innerHTML = item[key];        
+        counter2++;
+      }
+      myRow.insertCell();     
+      tableBody.rows[counter].cells[counter2].innerHTML = "<button onclick='this.parentElement.parentElement.remove()'>X</button>";
+      
+      if (counter < rows.length) {
+        counter2 = 0; // reset counter2
+        counter++;
+      };
+
+    }
   }
 
   get elem() {
