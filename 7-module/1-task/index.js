@@ -2,6 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class RibbonMenu {
   constructor(categories) {
+
     //this.categories = categories;
     this._container = this.createRibbonMenuElem();
     this.initRibbonMenu();
@@ -94,5 +95,7 @@ export default class RibbonMenu {
         } 
       }
     };
+
+    this.categories = categories;
   }
 }
