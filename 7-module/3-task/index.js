@@ -5,12 +5,12 @@ export default class StepSlider {
     this._steps = steps;
     this._value = value;
     this._segmentPercentage = 100/(steps - 1);
-    this._container = this.createSliderlElem();
+    this._slider = this.createSliderlElem();
     this.initSlider(this._value, this._segmentPercentage);
   }
 
   get elem() {
-    return this._container;
+    return this._slider;
   }
 
   createSliderlElem() {
@@ -20,9 +20,7 @@ export default class StepSlider {
     }
     
     let textHTML = 
-      `<div class="container" style="padding: 50px;">
-      <div class="slider">
-    
+      `<div class="slider">
         <div class="slider__thumb" style="left: ${this._segmentPercentage * this._value}%;">
           <span class="slider__value">${this._value}</span>
         </div>
@@ -38,21 +36,35 @@ export default class StepSlider {
   }
 
   initSlider(value, segmentPercentage) {
-    let slider = this._container.querySelector(".slider");
+    let slider = this._slider;
     let valueElem = slider.querySelector('.slider__value');
     let thumbElem = slider.querySelector('.slider__thumb');
     let progressElem = slider.querySelector('.slider__progress');
     let stepsElem = slider.querySelector('.slider__steps');
-    slider.addEventListener('click', function() {
+    let segmentAmount = this._steps - 1;
+
+    slider.addEventListener('click', function (clickEvent) {
       let stepActive = slider.querySelector('.slider__step-active');
       stepActive.className = '';
-      value++;
+      value = value + deltaX(clickEvent);
       valueElem.innerHTML = value;
       thumbElem.style.left = `${segmentPercentage * value}%`;
       progressElem.style.width = `${segmentPercentage * value}%`;
       stepsElem.getElementsByTagName("span")[value].className = 'slider__step-active';
+      slider.dispatchEvent(new CustomEvent("slider-change", {
+                                                              detail: value,
+                                                              bubbles: true
+                                                            }));
     });
+
+    function deltaX(event) {
+      let deltaXpx = event.clientX - thumbElem.getBoundingClientRect().left;
+      let segmentPixel = slider.getBoundingClientRect().width / segmentAmount;
+      return Math.round(deltaXpx/segmentPixel);
+    }
   }
 }
+
+
 
 
