@@ -51,16 +51,16 @@ export default class CartIcon {
         document.documentElement.clientWidth - this.elem.offsetWidth - 10
       ) + 'px'
 
-     demo.innerHTML = this.leftIndent;
-
       if (window.pageYOffset > this.initialTopCoord) {
-        // плавающая корзина
+        // плавающая корзина (относительно window)
         this.elem.style.position = "fixed";
-        this.elem.style.left = leftIndent;
+        this.elem.style.left = this.leftIndent;
+        this.elem.style.zIndex = 1e3;
       } else {
         // корзина сверху
-        this.elem.style.position = "absolute";
-        this.elem.style.right = 0;
+        this.elem.style.position = "";
+        this.elem.style.left = '';
+        this.elem.style.zIndex = '';
       }
     }
   }
