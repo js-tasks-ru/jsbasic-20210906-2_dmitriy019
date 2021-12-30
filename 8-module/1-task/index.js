@@ -34,11 +34,34 @@ export default class CartIcon {
   }
 
   addEventListeners() {
+    this.initialTopCoord = undefined;
+    this.leftIndent;
     document.addEventListener('scroll', () => this.updatePosition());
     window.addEventListener('resize', () => this.updatePosition());
   }
 
   updatePosition() {
-    // ваш код ...
+    if (this.elem.classList.contains('cart-icon_visible')) {
+      if (this.initialTopCoord == undefined) {
+        this.initialTopCoord = this.elem.getBoundingClientRect().top + window.pageYOffset;
+      }
+
+      this.leftIndent = Math.min(
+        document.querySelector('.container').getBoundingClientRect().right + 20,
+        document.documentElement.clientWidth - this.elem.offsetWidth - 10
+      ) + 'px'
+
+      if (window.pageYOffset > this.initialTopCoord) {
+        // плавающая корзина (относительно window)
+        this.elem.style.position = "fixed";
+        this.elem.style.left = this.leftIndent;
+        this.elem.style.zIndex = 1e3;
+      } else {
+        // корзина сверху
+        this.elem.style.position = "";
+        this.elem.style.left = '';
+        this.elem.style.zIndex = '';
+      }
+    }
   }
 }
